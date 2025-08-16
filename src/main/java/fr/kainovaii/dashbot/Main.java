@@ -2,6 +2,7 @@ package fr.kainovaii.dashbot;
 
 import fr.kainovaii.dashbot.commands.Command;
 import fr.kainovaii.dashbot.listeners.SlashCommandListener;
+import fr.kainovaii.dashbot.webhook.UptimeKumaWebhook;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import fr.kainovaii.dashbot.listeners.ButtonListener; // nouveau listener pour les boutons
+import fr.kainovaii.dashbot.listeners.ButtonListener;
 
 public class Main
 {
@@ -50,7 +51,7 @@ public class Main
         JDA jda = builder.build();
         jda.awaitReady();
 
-        long channelId = 1397595628711841934L; // ton channel Discord
+        long channelId = 1397595628711841934L;
         new UptimeKumaWebhook(jda, channelId);
         System.out.println("Serveur webhook Uptime Kuma démarré !");
 
