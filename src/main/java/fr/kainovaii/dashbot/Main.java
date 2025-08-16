@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import fr.kainovaii.dashbot.listeners.ButtonListener; // nouveau listener pour les boutons
+
 public class Main
 {
     public static void main(String[] args) throws Exception
-        String DISCORD_TOKEN = "YOUR_SAFE_PLACEHOLDER";
+    {
         Dotenv dotenv = Dotenv.configure().directory("../").load();
         String token = dotenv.get("DISCORD_TOKEN");
 
@@ -40,10 +42,17 @@ public class Main
                 .collect(Collectors.toList());
 
         JDABuilder builder = JDABuilder.createDefault(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
-                .addEventListeners(new SlashCommandListener(commands));
+                .addEventListeners(
+                        new SlashCommandListener(commands),
+                        new ButtonListener()
+                );
 
         JDA jda = builder.build();
         jda.awaitReady();
+
+        long channelId = 1397595628711841934L; // ton channel Discord
+        new UptimeKumaWebhook(jda, channelId);
+        System.out.println("Serveur webhook Uptime Kuma démarré !");
 
         long guildId = 826490869359968326L;
         Guild guild = jda.getGuildById(guildId);
