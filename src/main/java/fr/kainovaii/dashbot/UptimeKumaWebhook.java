@@ -10,20 +10,20 @@ import spark.Spark;
 
 import java.awt.*;
 
-public class UptimeKumaWebhook {
+public class UptimeKumaWebhook
+{
     private final JDA jda;
     private final long channelId;
 
-    public UptimeKumaWebhook(JDA jda, long channelId) {
+    public UptimeKumaWebhook(JDA jda, long channelId)
+    {
         this.jda = jda;
         this.channelId = channelId;
         setupServer();
     }
 
-    private void setupServer() {
-        Spark.port(8080); // port pour recevoir le webhook
-        Spark.get("/uptime", (req, res) -> "Le serveur fonctionne !");
-
+    private void setupServer()
+    {
         Spark.post("/uptime", (req, res) -> {
             try {
                 JsonObject json = JsonParser.parseString(req.body()).getAsJsonObject();
