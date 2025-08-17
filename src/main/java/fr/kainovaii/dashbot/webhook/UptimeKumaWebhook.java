@@ -26,7 +26,7 @@ public class UptimeKumaWebhook {
 
     private void setupServer()
     {
-        Spark.port(8080);
+        Spark.port(8282);
 
         Spark.post("/uptime", (req, res) -> {
             try {

@@ -9,6 +9,8 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.reflections.Reflections;
 import io.github.cdimascio.dotenv.Dotenv;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.OnlineStatus;
 
 import java.util.List;
 import java.util.Set;
@@ -20,7 +22,7 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        Dotenv dotenv = Dotenv.configure().directory("../").load();
+        Dotenv dotenv = Dotenv.configure().directory("./").load();
         String token = dotenv.get("DISCORD_TOKEN");
 
         if (token == null || token.isEmpty()) {
@@ -50,6 +52,8 @@ public class Main
 
         JDA jda = builder.build();
         jda.awaitReady();
+        jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+        jda.getPresence().setActivity(Activity.watching("kainovaii.cloud"));
 
         long channelId = 1397595628711841934L;
         new UptimeKumaWebhook(jda, channelId);
