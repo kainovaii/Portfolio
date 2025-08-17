@@ -22,8 +22,7 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        Dotenv dotenv = Dotenv.configure().directory("./").load();
-        String token = dotenv.get("DISCORD_TOKEN");
+        String token = Main.getDotenv().get("DISCORD_TOKEN");
 
         if (token == null || token.isEmpty()) {
             throw new IllegalStateException("Le token Discord n'a pas été trouvé !");
@@ -55,11 +54,11 @@ public class Main
         jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         jda.getPresence().setActivity(Activity.watching("kainovaii.cloud"));
 
-        long channelId = 1397595628711841934L;
+        long channelId = Long.parseLong(Main.getDotenv().get("CHANNEL_ID"));
         new UptimeKumaWebhook(jda, channelId);
         System.out.println("Serveur webhook Uptime Kuma démarré !");
 
-        long guildId = 826490869359968326L;
+        long guildId = Long.parseLong(Main.getDotenv().get("GUILD_ID"));
         Guild guild = jda.getGuildById(guildId);
 
         if (guild != null) {
@@ -70,5 +69,10 @@ public class Main
         } else {
             System.out.println("La guild n'a pas été trouvée !");
         }
+    }
+
+    public static Dotenv getDotenv()
+    {
+        return Dotenv.configure().directory("./").load();
     }
 }

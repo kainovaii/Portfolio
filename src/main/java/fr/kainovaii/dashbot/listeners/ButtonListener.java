@@ -8,7 +8,7 @@ public class ButtonListener extends ListenerAdapter
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event)
     {
-        if (event.getComponentId().equals("myButton")) {
+        if (event.getComponentId().equals("uptimeButtonSeeMore")) {
             event.reply("Tu as cliqué sur le bouton !").setEphemeral(true).queue();
         }
     }
