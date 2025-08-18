@@ -7,5 +7,5 @@ public interface Command
 {
     String getName();
     SlashCommandData getCommandData();
-    void execute(SlashCommandInteractionEvent event);
+    void execute(SlashCommandInteractionEvent event) throws Exception;
 }

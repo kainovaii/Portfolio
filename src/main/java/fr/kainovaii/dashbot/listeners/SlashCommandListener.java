@@ -24,7 +24,11 @@ public class SlashCommandListener extends ListenerAdapter
     {
         Command cmd = commands.get(event.getName());
         if (cmd != null) {
-            cmd.execute(event);
+            try {
+                cmd.execute(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
             event.reply("Commande inconnue!").setEphemeral(true).queue();
         }
