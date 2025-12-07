@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Titre par défaut{% endblock %}</title>
+</head>
+<body>
+
+<header>
+    <h1>Mon Site</h1>
+</header>
+
+<main>
+    {% block content %}
+    <!-- Contenu de la page -->
+    {% endblock %}
+</main>
+
+<footer>
+    <p>© 2025 - Mon site</p>
+</footer>
+
+</body>
+</html>
