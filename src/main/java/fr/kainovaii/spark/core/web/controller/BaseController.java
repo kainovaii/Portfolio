@@ -33,17 +33,6 @@ public class BaseController
         session.attribute("flash_" + key, message);
     }
 
-    protected String render(String template, Map<String, Object> model)
-    {
-        ModelAndView mv = new ModelAndView(model, template);
-        return TemplateManager.get().render(mv);
-    }
-
-    protected String render(String template)
-    {
-        return render(template, Map.of());
-    }
-
     public static Map<String, String> collectFlashes(Request req)
     {
         Session session = req.session(false);
@@ -60,9 +49,29 @@ public class BaseController
         return flashes;
     }
 
-    protected void redirectWithFlash(Request req, Response res, String type, String message, String location)
+    protected Object redirectWithFlash(Request req, Response res, String type, String message, String location)
     {
         setFlash(req, type, message);
         res.redirect(location);
+        return null;
+    }
+
+    protected String render(String template, Map<String, Object> model) {
+        try {
+            Map<String, Object> merged = new HashMap<>(TemplateManager.getGlobals());
+            if (model != null) merged.putAll(model);
+
+            return TemplateManager.get().render(template, merged);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected String render(String template) {
+        return render(template, Map.of());
+    }
+
+    protected static void setGlobal(String key, Object value) {
+        TemplateManager.setGlobal(key, value);
     }
 }

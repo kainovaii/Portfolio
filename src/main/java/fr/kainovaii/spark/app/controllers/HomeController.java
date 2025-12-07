@@ -2,10 +2,8 @@ package fr.kainovaii.spark.app.controllers;
 
 import fr.kainovaii.spark.core.web.controller.BaseController;
 import fr.kainovaii.spark.core.web.controller.Controller;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Spark;
 
 import java.util.Map;
 
@@ -21,6 +19,6 @@ public class HomeController extends BaseController
 
     private Object homepage(Request req, Response res)
     {
-        return render("home.peb.html", Map.of("title", "Accueil"));
+        return render("home.html", Map.of("title", "Accueil"));
     }
 }
