@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kainovaii – Développeur Backend Java & PHP</title>
+    <meta name="description" content="Portfolio de Kainovaii, développeur backend spécialisé en Java et PHP. Découvrez mes projets et réalisations open-source.">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="/assets/js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="font-inter bg-bg-primary text-text-primary overflow-x-hidden">
+    <div class="fixed inset-0 -z-10 bg-gradient-custom animate-bg-move"></div>
+
+    <nav class="fixed top-0 left-0 right-0 bg-bg-primary/80 backdrop-blur-xl border-b border-border-color z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-8">
+            <div class="text-2xl font-bold text-gradient">
+                <a href="/">
+                    <img src="/assets/img/logo.png" width="150" alt="">
+                </a>
+            </div>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#home" class="text-text-secondary hover:text-accent-tertiary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-tertiary after:transition-all hover:after:w-full">Accueil</a></li>
+                <li><a href="#skills" class="text-text-secondary hover:text-accent-tertiary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-tertiary after:transition-all hover:after:w-full">Compétences</a></li>
+                <li><a href="#projects" class="text-text-secondary hover:text-accent-tertiary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-tertiary after:transition-all hover:after:w-full">Projets</a></li>
+                <li><a href="#contact" class="text-text-secondary hover:text-accent-tertiary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-tertiary after:transition-all hover:after:w-full">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Contenu de la page -->
+        {% endblock %}
+    </main>
+
+    <footer class="bg-bg-secondary border-t border-border-color py-8">
+        <div class="max-w-6xl mx-auto px-8 text-center">
+            <p class="text-text-secondary">&copy; 2024 KainoVaii. Développé avec passion ☕.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
