@@ -8,6 +8,8 @@ public class Main
         Spark app = new Spark();
         app.registerMotd();
         app.loadConfigAndEnv();
+        app.connectDatabase();
         app.startWebServer();
+        app.initUser();
     }
 }

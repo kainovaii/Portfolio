@@ -1,10 +1,28 @@
 package fr.kainovaii.spark.core;
 
+import fr.kainovaii.spark.app.repository.UserRepository;
+import fr.kainovaii.spark.core.database.SQLite;
 import fr.kainovaii.spark.core.web.WebServer;
+
+import java.util.logging.Logger;
 
 public class Spark
 {
+    public final static Logger LOGGER =  Logger.getLogger("Spark");;
+    private final SQLite sqlite;
     private static String webPort;
+
+    public Spark()
+    {
+        this.sqlite =  new SQLite(Spark.LOGGER);
+    }
+
+    public void connectDatabase()
+    {
+        System.out.println("Loading database");
+        sqlite.connectDatabaseForCurrentThread();
+        sqlite.ensureTablesExist();
+    }
 
     public void loadConfigAndEnv()
     {
@@ -38,5 +56,13 @@ public class Spark
         System.out.println(CYAN + "|      Chargement des modules...       |" + RESET);
         System.out.println(CYAN + "+--------------------------------------+" + RESET);
         System.out.println();
+    }
+
+    public void initUser()
+    {
+        UserRepository userRepository = new UserRepository();
+        if (!UserRepository.userExist("admin")) {
+            userRepository.create("admin", "$2a$12$8oYepa4rQw2xixu1KpvTbeg9aVAifZCUZGhn5/rfE7ugjqk9SXi5q","ADMIN");
+        }
     }
 }
