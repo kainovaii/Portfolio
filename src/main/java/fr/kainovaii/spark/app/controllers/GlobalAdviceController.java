@@ -4,6 +4,11 @@ import fr.kainovaii.spark.core.web.controller.BaseController;
 import spark.Request;
 import spark.Session;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 public class GlobalAdviceController extends BaseController
 {
     record User(String username, String role) {}
@@ -11,5 +16,16 @@ public class GlobalAdviceController extends BaseController
     public static void applyGlobals(Request req)
     {
         Session session = req.session(true);
+
+        String username = Optional.ofNullable(session.attribute("username")).orElse("Invité").toString();
+        String role = Optional.ofNullable(session.attribute("role")).orElse("").toString();
+        List<User> loggedUser = Collections.singletonList(new User(username, role));
+
+        setGlobal("title", "The Guardian");
+        setGlobal("isLogged", isLogged(req));
+        setGlobal("loggedUser", loggedUser);
+
+        Map<String, String> flashes = collectFlashes(req);
+        setGlobal("flashes", flashes);
     }
 }
