@@ -54,7 +54,24 @@ public class SQLite
             role TEXT NOT NULL
         )
         """);
-
+        Base.exec("""
+        CREATE TABLE IF NOT EXISTS skills (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            icon TEXT NOT NULL UNIQUE,
+            title TEXT NOT NULL,
+            tools TEXT NOT NULL CHECK (json_valid(tools))
+        )
+        """);
+        Base.exec("""
+        CREATE TABLE IF NOT EXISTS projects (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            icon TEXT NOT NULL UNIQUE,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL,
+            link TEXT NOT NULL,
+            tools TEXT NOT NULL CHECK (json_valid(tools))
+        )
+        """);
         logger.info("Tables SQLite créées ou existantes vérifiées.");
     }
 

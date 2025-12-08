@@ -10,18 +10,18 @@ import java.util.Map;
 import static spark.Spark.get;
 
 @Controller
-public class AdminController extends BaseController
+public class SkillController extends BaseController
 {
-    public AdminController() { initRoutes(); }
+    public SkillController() { initRoutes(); }
 
     private void initRoutes()
     {
-        get("/admin/projects", this::list);
+        get("/admin/skills", this::list);
     }
 
     private Object list(Request req, Response res)
     {
         requireLogin(req, res);
-        return render("admin/projects.html", Map.of());
+        return render("admin/skills.html", Map.of());
     }
 }
