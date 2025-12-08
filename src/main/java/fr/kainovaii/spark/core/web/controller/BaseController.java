@@ -1,5 +1,7 @@
 package fr.kainovaii.spark.core.web.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.kainovaii.spark.core.web.template.TemplateManager;
 import spark.*;
 
@@ -10,6 +12,8 @@ import static spark.Spark.halt;
 
 public class BaseController
 {
+    private static final ObjectMapper mapper = new ObjectMapper();
+
     protected static boolean isLogged(Request req)
     {
         Session session = req.session(false);
@@ -53,6 +57,7 @@ public class BaseController
     {
         setFlash(req, type, message);
         res.redirect(location);
+        halt();
         return null;
     }
 
@@ -73,5 +78,9 @@ public class BaseController
 
     protected static void setGlobal(String key, Object value) {
         TemplateManager.setGlobal(key, value);
+    }
+
+    public static JsonNode toJson(String text) throws Exception {
+        return mapper.readTree(text);
     }
 }

@@ -59,7 +59,7 @@ public class SQLite
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             icon TEXT NOT NULL UNIQUE,
             title TEXT NOT NULL,
-            tools TEXT NOT NULL CHECK (json_valid(tools))
+            tools TEXT NOT NULL
         )
         """);
         Base.exec("""
@@ -69,7 +69,7 @@ public class SQLite
             title TEXT NOT NULL,
             description TEXT NOT NULL,
             link TEXT NOT NULL,
-            tools TEXT NOT NULL CHECK (json_valid(tools))
+            tools TEXT NOT NULL
         )
         """);
         logger.info("Tables SQLite créées ou existantes vérifiées.");

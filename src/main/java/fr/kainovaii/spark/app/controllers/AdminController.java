@@ -16,12 +16,12 @@ public class AdminController extends BaseController
 
     private void initRoutes()
     {
-        get("/admin/projects", this::list);
+        get("/admin", this::list);
     }
 
     private Object list(Request req, Response res)
     {
         requireLogin(req, res);
-        return render("admin/projects.html", Map.of());
+        return render("admin/dashboard.html", Map.of());
     }
 }
