@@ -28,12 +28,18 @@ public class GlobalAdviceController extends BaseController
         String role = Optional.ofNullable(session.attribute("role")).orElse("").toString();
         List<User> loggedUser = Collections.singletonList(new User(username, role));
 
+        int skills_count = DB.withConnection(() -> skillRepository.getAll().size());
+        int projects_count = DB.withConnection(() -> projectRepository.getAll().size());
+
         List<Skill> skills = DB.withConnection(() -> skillRepository.getAll().stream().toList());
         List<Project> projects = DB.withConnection(() -> projectRepository.getAll().stream().toList());
 
         setGlobal("title", "The Guardian");
         setGlobal("isLogged", isLogged(req));
         setGlobal("loggedUser", loggedUser);
+
+        setGlobal("skills_count", skills_count);
+        setGlobal("projects_count", projects_count);
 
         setGlobal("skills", skills);
         setGlobal("projects", projects);

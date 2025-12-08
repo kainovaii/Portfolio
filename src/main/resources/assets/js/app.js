@@ -3461,3 +3461,4 @@
 
 WebComponent('test-card', 'test_card');
 WebComponent('skill-card', 'skill_card');
+WebComponent('stat-card', 'stat_card');

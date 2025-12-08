@@ -34,9 +34,6 @@
                                     <button class="table-sort d-flex justify-content-between" data-sort="sort-status">Title</button>
                                 </th>
                                 <th>
-                                    <button class="table-sort d-flex justify-content-between" data-sort="sort-status">Description</button>
-                                </th>
-                                <th>
                                     <button class="table-sort d-flex justify-content-between" data-sort="sort-status">Link</button>
                                 </th>
                                 <th>
@@ -55,10 +52,7 @@
                                     <span>{{ project.title }}</span>
                                 </td>
                                 <td class="sort-title">
-                                    <span>{{ project.description }}</span>
-                                </td>
-                                <td class="sort-title">
-                                    <span class="badge">{{ project.link }}</span>
+                                    <a href="{{ project.link }}" class="badge">{{ project.link }}</a>
                                 </td>
                                 <td class="sort-tools">
                                     <div x-data="{ tools: '{{ project.tools }}'.replace('[','').replace(']','').split(',').map(t => t.trim()) }">
