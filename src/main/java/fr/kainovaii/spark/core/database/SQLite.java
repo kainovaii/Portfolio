@@ -72,6 +72,12 @@ public class SQLite
             tools TEXT NOT NULL
         )
         """);
+        Base.exec("""
+        CREATE TABLE IF NOT EXISTS settings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            admin_exist INTEGER NOT NULL UNIQUE
+        )
+        """);
         logger.info("Tables SQLite créées ou existantes vérifiées.");
     }
 

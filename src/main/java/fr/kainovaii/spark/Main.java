@@ -10,6 +10,6 @@ public class Main
         app.loadConfigAndEnv();
         app.connectDatabase();
         app.startWebServer();
-        app.initUser();
+        app.initWebsite();
     }
 }
