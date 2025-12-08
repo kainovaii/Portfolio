@@ -49,8 +49,8 @@ Voici un aperçu de mon portfolio :
 
 ## 🚀 Installation
 
-1. Cloner le dépôt :
-   ```bash
-   git clone https://github.com/ton-username/portfolio.git
-   cd portfolio
-   ./build.sh
+
+```bash
+git clone https://github.com/ton-username/portfolio.git
+cd portfolio
+./build.sh
