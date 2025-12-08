@@ -19,6 +19,6 @@ public class HomeController extends BaseController
 
     private Object homepage(Request req, Response res)
     {
-        return render("home.html", Map.of("title", "Accueil"));
+        return render("landing/home.html", Map.of("title", "Accueil"));
     }
 }
