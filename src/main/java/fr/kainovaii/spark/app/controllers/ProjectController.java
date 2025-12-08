@@ -10,18 +10,18 @@ import java.util.Map;
 import static spark.Spark.get;
 
 @Controller
-public class AdminController extends BaseController
+public class ProjectController extends BaseController
 {
-    public AdminController() { initRoutes(); }
+    public ProjectController() { initRoutes(); }
 
     private void initRoutes()
     {
-        get("/admin/projects", this::list);
+        get("/admin", this::dashboard);
     }
 
-    private Object list(Request req, Response res)
+    private Object dashboard(Request req, Response res)
     {
         requireLogin(req, res);
-        return render("admin/projects.html", Map.of());
+        return render("admin/dashboard.html", Map.of());
     }
 }
