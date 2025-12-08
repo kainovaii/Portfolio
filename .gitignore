@@ -34,6 +34,7 @@ build/
 ### VS Code ###
 .vscode/
 .env
+/Spark
 
 ### Mac OS ###
 .DS_Store
