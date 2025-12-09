@@ -15,10 +15,19 @@ public class HomeController extends BaseController
 {
     public HomeController() { initRoutes(); }
 
-    private void initRoutes() { get("/", this::homepage);}
+    private void initRoutes()
+    {
+        get("/", this::homepage);
+        get("/projects", this::projects);
+    }
 
     private Object homepage(Request req, Response res)
     {
-        return render("landing/home.html", Map.of("title", "Accueil"));
+        return render("landing/home.html");
+    }
+
+    private Object projects(Request req, Response res)
+    {
+        return render("landing/projects.html");
     }
 }
