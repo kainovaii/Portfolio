@@ -19,7 +19,7 @@ WORKDIR /app
 # Copier le jar "jar-with-dependencies"
 COPY --from=build /app/target/*-jar-with-dependencies.jar app.jar
 
-# Spark écoute sur 4567 par défaut
-EXPOSE 4567
+# Spark écoute sur 8888 par défaut
+EXPOSE 8888
 
 CMD ["java", "-jar", "app.jar"]
