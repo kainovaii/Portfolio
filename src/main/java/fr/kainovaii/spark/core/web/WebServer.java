@@ -11,6 +11,7 @@ public class WebServer
 {
     public void start()
     {
+        ipAddress("0.0.0.0");
         port(Spark.getWebPort());
         staticFiles.location("/");
         before((req, res) -> { GlobalAdviceController.applyGlobals(req); });
