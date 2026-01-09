@@ -26,6 +26,7 @@ Bienvenue sur le dépôt de mon **portfolio personnel**, développé en **Java**
 - **[Pebble Templates](https://pebbletemplates.io/)** : moteur de templates HTML dynamique.
 - **[ActiveJDBC](https://javalite.io/activejdbc)** : ORM pour manipuler la base de données.
 - **[SQLite JDBC](https://github.com/xerial/sqlite-jdbc)** : driver JDBC pour SQLite.
+- **[Tabler](https://github.com/tabler/tabler)** : html dashboard.
 
 ---
 
