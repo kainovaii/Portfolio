@@ -51,6 +51,6 @@ Voici un aperçu de mon portfolio :
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/ton-username/portfolio.git
+git clone https://github.com/kainovaii/portfolio.git
 cd portfolio
 ./build.sh
