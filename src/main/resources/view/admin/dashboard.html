@@ -1,4 +1,6 @@
-{% extends "layout/admin.html" %}
+{% extends "view/layout/admin.html" %}
+{% import "components/stat-card.html" as StatCard %}
+
 {% block content %}
 <div class="page-body">
     <div class="container-xxl">
@@ -6,8 +8,8 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         </div>
         <div class="row">
-            <stat-card class="col-xl-3 col-md-6 mb-4" x-data="{name: 'Total skills', content: '{{ skills_count }}'}"></stat-card>
-            <stat-card class="col-xl-3 col-md-6 mb-4" x-data="{name: 'Total projects', content: '{{ projects_count }}'}"></stat-card>
+            {{ StatCard.get('Total skills', skills_count, 'code', 'primary') }}
+            {{ StatCard.get('Projects', projects_count, 'folder', 'success') }}
         </div>
     </div>
 </div>

@@ -1,11 +1,10 @@
 package fr.kainovaii.spark.app.controllers;
 
+import fr.kainovaii.core.database.DB;
+import fr.kainovaii.core.web.controller.BaseController;
+import fr.kainovaii.core.web.controller.Controller;
 import fr.kainovaii.spark.app.models.Project;
-import fr.kainovaii.spark.app.models.Skill;
 import fr.kainovaii.spark.app.repository.ProjectRepository;
-import fr.kainovaii.spark.core.database.DB;
-import fr.kainovaii.spark.core.web.controller.BaseController;
-import fr.kainovaii.spark.core.web.controller.Controller;
 import spark.Request;
 import spark.Response;
 

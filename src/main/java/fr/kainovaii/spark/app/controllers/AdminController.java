@@ -1,7 +1,12 @@
 package fr.kainovaii.spark.app.controllers;
 
-import fr.kainovaii.spark.core.web.controller.BaseController;
-import fr.kainovaii.spark.core.web.controller.Controller;
+import fr.kainovaii.core.database.DB;
+import fr.kainovaii.core.security.HasRole;
+import fr.kainovaii.core.web.controller.BaseController;
+import fr.kainovaii.core.web.controller.Controller;
+import fr.kainovaii.core.web.methods.GET;
+import fr.kainovaii.spark.app.repository.ProjectRepository;
+import fr.kainovaii.spark.app.repository.SkillRepository;
 import spark.Request;
 import spark.Response;
 
@@ -12,16 +17,19 @@ import static spark.Spark.get;
 @Controller
 public class AdminController extends BaseController
 {
-    public AdminController() { initRoutes(); }
+    private final SkillRepository skillRepository = new SkillRepository();
+    private final ProjectRepository projectRepository = new ProjectRepository();
 
-    private void initRoutes()
-    {
-        get("/admin", this::list);
-    }
-
+    @HasRole("ADMIN")
+    @GET(value = "/admin", name = "admin_home")
     private Object list(Request req, Response res)
     {
-        requireLogin(req, res);
-        return render("admin/dashboard.html", Map.of());
+        int skills_count = DB.withConnection(() -> skillRepository.getAll().size());
+        int projects_count = DB.withConnection(() -> projectRepository.getAll().size());
+
+        return render("admin/dashboard.html", Map.of(
+            "skills_count", skills_count,
+            "projects_count", projects_count
+        ));
     }
 }

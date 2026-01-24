@@ -1,10 +1,10 @@
-package fr.kainovaii.spark.core;
+package fr.kainovaii.core;
 
 import fr.kainovaii.spark.app.models.Setting;
 import fr.kainovaii.spark.app.repository.SettingRepository;
 import fr.kainovaii.spark.app.repository.UserRepository;
-import fr.kainovaii.spark.core.database.SQLite;
-import fr.kainovaii.spark.core.web.WebServer;
+import fr.kainovaii.core.database.SQLite;
+import fr.kainovaii.core.web.WebServer;
 import org.javalite.activejdbc.LazyList;
 
 import java.util.logging.Logger;
@@ -27,16 +27,16 @@ public class Spark
         sqlite.ensureTablesExist();
     }
 
-    public void loadConfigAndEnv()
+    public static EnvLoader loadConfigAndEnv()
     {
         EnvLoader env = new EnvLoader();
         env.load();
-        webPort = env.get("PORT_WEB");
+        return env;
     }
 
     public void startWebServer() { new WebServer().start(); }
 
-    public static int getWebPort() { return Integer.parseInt(webPort); }
+    public static int getWebPort() { return Integer.parseInt(Spark.loadConfigAndEnv().get("PORT_WEB")); }
 
     public void registerMotd()
     {
@@ -75,12 +75,12 @@ public class Spark
         }
 
         if (!adminExist && !UserRepository.userExist("admin")) {
-            userRepository.create("admin", "$2a$12$8oYepa4rQw2xixu1KpvTbeg9aVAifZCUZGhn5/rfE7ugjqk9SXi5q", "ADMIN");
+            userRepository.create("admin","admin@email.com", "$2a$12$8oYepa4rQw2xixu1KpvTbeg9aVAifZCUZGhn5/rfE7ugjqk9SXi5q", "ADMIN");
             if (settings.isEmpty()) {
-                settingRepository.create(true);
+                settingRepository.create(1);
             } else {
                 Setting setting = settings.get(0);
-                setting.set("admin_exist", true);
+                setting.set("admin_exist", 1);
                 setting.saveIt();
             }
         }

@@ -1,5 +1,6 @@
-package fr.kainovaii.spark.core.web.template;
+package fr.kainovaii.core.web.template;
 
+import fr.kainovaii.core.web.route.RoutePebbleExtension;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 import io.pebbletemplates.pebble.PebbleEngine;
@@ -15,11 +16,11 @@ public class PebbleTemplateEngine extends TemplateEngine
     public PebbleTemplateEngine()
     {
         ClasspathLoader loader = new ClasspathLoader();
-        loader.setPrefix("view");
         engine = new PebbleEngine.Builder()
-                .loader(loader)
-                .cacheActive(true)
-                .build();
+            .loader(loader)
+            .extension(new RoutePebbleExtension())
+            .cacheActive(true)
+            .build();
     }
 
     @Override
@@ -35,7 +36,8 @@ public class PebbleTemplateEngine extends TemplateEngine
         }
     }
 
-    public String render(String templateName, Map<String, Object> model) {
+    public String render(String templateName, Map<String, Object> model)
+    {
         try {
             var template = engine.getTemplate(templateName);
             var writer = new StringWriter();

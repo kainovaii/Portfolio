@@ -1,4 +1,4 @@
-package fr.kainovaii.spark.core.database;
+package fr.kainovaii.core.database;
 
 import org.javalite.activejdbc.Base;
 
@@ -45,11 +45,11 @@ public class SQLite
     public void ensureTablesExist()
     {
         if (!Base.hasConnection()) throw new IllegalStateException("No SQLite connection open!");
-
         Base.exec("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL,
             role TEXT NOT NULL
         )
@@ -78,7 +78,7 @@ public class SQLite
             admin_exist INTEGER NOT NULL UNIQUE
         )
         """);
-        logger.info("Tables SQLite créées ou existantes vérifiées.");
+        logger.info("SQLite tables created or existing verified.");
     }
 
     public void close() {

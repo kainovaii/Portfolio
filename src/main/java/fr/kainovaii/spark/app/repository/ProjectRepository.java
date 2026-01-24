@@ -1,7 +1,7 @@
 package fr.kainovaii.spark.app.repository;
 
+import fr.kainovaii.core.database.DB;
 import fr.kainovaii.spark.app.models.Project;
-import fr.kainovaii.spark.core.database.DB;
 import org.javalite.activejdbc.LazyList;
 
 public class ProjectRepository

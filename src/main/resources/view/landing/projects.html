@@ -1,4 +1,20 @@
-{% extends "layout/front.html" %}
+{% extends "view/layout/front.html" %}
+{% import "components/project-card.html" as ProjectCard %}
+
 {% block content %}
-{% include "./partials/projects.html" %}
+<section id="projects" class="py-24">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h2 class="text-5xl font-bold mb-4">Mes projets</h2>
+            <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+                Une sélection de projets qui illustrent mon expertise technique et ma créativité
+            </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            {% for project in projects %}
+            {{ ProjectCard.get(project) }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock %}

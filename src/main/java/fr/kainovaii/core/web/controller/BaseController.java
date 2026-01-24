@@ -1,19 +1,16 @@
-package fr.kainovaii.spark.core.web.controller;
+package fr.kainovaii.core.web.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.kainovaii.spark.core.web.template.TemplateManager;
+import fr.kainovaii.core.database.DB;
+import fr.kainovaii.core.web.ApiResponse;
+import fr.kainovaii.core.web.template.TemplateManager;
+import fr.kainovaii.spark.app.models.User;
 import spark.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.halt;
 
-public class BaseController
+public class BaseController extends ApiResponse
 {
-    private static final ObjectMapper mapper = new ObjectMapper();
-
     protected static boolean isLogged(Request req)
     {
         Session session = req.session(false);
@@ -23,15 +20,30 @@ public class BaseController
         return Boolean.TRUE.equals(logged);
     }
 
-    protected void requireLogin(Request req, Response res)
+    protected static User getLoggedUser(Request req)
+    {
+        Session session = req.session(false);
+        return DB.withConnection(() -> User.findById(session.attribute("id")));
+    }
+
+    protected static void requireLogin(Request req, Response res)
     {
         if (!isLogged(req)) {
-            res.redirect("/login");
+            res.redirect("/users/login");
             halt();
         }
     }
 
-    protected void setFlash(Request req, String key, String message)
+    private String extractToken(Request req)
+    {
+        String authHeader = req.headers("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7);
+        }
+        return null;
+    }
+
+    protected static void setFlash(Request req, String key, String message)
     {
         Session session = req.session();
         session.attribute("flash_" + key, message);
@@ -53,7 +65,7 @@ public class BaseController
         return flashes;
     }
 
-    protected Object redirectWithFlash(Request req, Response res, String type, String message, String location)
+    protected static Object redirectWithFlash(Request req, Response res, String type, String message, String location)
     {
         setFlash(req, type, message);
         res.redirect(location);
@@ -61,26 +73,14 @@ public class BaseController
         return null;
     }
 
-    protected String render(String template, Map<String, Object> model) {
+    protected String render(String template, Map<String, Object> model)
+    {
         try {
             Map<String, Object> merged = new HashMap<>(TemplateManager.getGlobals());
             if (model != null) merged.putAll(model);
-
-            return TemplateManager.get().render(template, merged);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            return TemplateManager.get().render("view/" + template, merged);
+        } catch (Exception exception) {
+            return exception.getMessage();
         }
-    }
-
-    protected String render(String template) {
-        return render(template, Map.of());
-    }
-
-    protected static void setGlobal(String key, Object value) {
-        TemplateManager.setGlobal(key, value);
-    }
-
-    public static JsonNode toJson(String text) throws Exception {
-        return mapper.readTree(text);
     }
 }

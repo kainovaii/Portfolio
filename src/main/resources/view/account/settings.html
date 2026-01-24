@@ -1,31 +1,72 @@
-{% extends "layout/admin.html" %}
+{% extends "view/layout/front.html" %}
 {% block content %}
 <div class="page-body">
     <div class="container-xxl">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Settings</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row mt-4">
+            <div class="col-md-6">
                 <div class="card card-bordered">
+                    <div class="card-header">
+                        <h3 class="card-title">Settings</h3>
+                    </div>
                     <div class="card-body">
-                        <form action="/account" method="POST">
+                        <form action="{{ route(name='user_update') }}" method="POST">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="form-group">
                                     <div>
-                                        <label for="username" class="form-label">Username:</label>
-                                        <input class="form-control" type="text" id="username" name="username" value="" placeholder="Enter username....">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input class="form-control" type="text" id="username" name="username" value="{{ loggedUser.username }}" placeholder="Enter new username">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="form-group">
                                     <div>
-                                        <label for="password" class="form-label">New password:</label>
-                                        <input class="form-control" type="text" id="password" name="password" value="" placeholder="Enter new password....">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input class="form-control" type="text" id="email" name="email" value="{{ loggedUser.email }}" placeholder="Enter new email">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="mt-3">
-                                        <button type="submit" class="btn btn-primary w-100">Save</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary w-100">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-bordered">
+                    <div class="card-header">
+                        <h3 class="card-title">Password</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route(name='user_update_password') }}" method="POST">
+                            <div class="row">
+                                <div x-data="{ password: '{{ token.getString('token') }}', passwordConfirm: '{{ token.getString('token') }}', viewPassword: true, viewPasswordConfirm: true, get passwordsMatch() { return this.password === this.passwordConfirm && this.password.length > 0; } }">
+                                    <div class="form-group">
+                                        <label for="password" class="form-label">New password</label>
+                                        <div class="input-group input-group-flat">
+                                            <input id="password" :type="viewPassword ? 'password' : 'text'" class="form-control" x-model="password" name="password" placeholder="Enter new password" autocomplete="new-password">
+                                            <span class="input-group-text">
+                                                <a class="link-secondary" @click="viewPassword = !viewPassword" style="background: transparent; border: none; cursor: pointer;" data-bs-toggle="tooltip" aria-label="View password">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1"> <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path> </svg>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirm" class="form-label">New password confirm</label>
+                                        <div class="input-group input-group-flat">
+                                            <input id="password_confirm" :type="viewPasswordConfirm ? 'password' : 'text'" class="form-control" x-model="passwordConfirm" name="password_confirm" placeholder="Confirm new password" autocomplete="new-password" :class="{ 'is-invalid': passwordConfirm.length > 0 && !passwordsMatch }">
+                                            <span class="input-group-text">
+                                                <a class="link-secondary" @click="viewPasswordConfirm = !viewPasswordConfirm" style="background: transparent; border: none; cursor: pointer;" data-bs-toggle="tooltip" aria-label="View password">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1"> <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path> </svg>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <div x-show="passwordConfirm.length > 0 && !passwordsMatch" class="invalid-feedback" style="display: block;">
+                                            The passwords do not match
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary w-100" :disabled="!passwordsMatch">Save</button>
                                     </div>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>Spark</name>
+  <name>UnitPanel</name>
   <description>Starting spark web project</description>
 
   <properties>
@@ -55,6 +55,12 @@
       <groupId>org.xerial</groupId>
       <artifactId>sqlite-jdbc</artifactId>
       <version>3.41.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

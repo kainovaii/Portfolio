@@ -1,36 +1,88 @@
 package fr.kainovaii.spark.app.repository;
 
+import fr.kainovaii.core.database.DB;
 import fr.kainovaii.spark.app.models.User;
 import org.javalite.activejdbc.LazyList;
 
-public class UserRepository
-{
-    public void create(String username, String password, String role)
+import java.util.List;
+
+public class UserRepository {
+
+    public Boolean create(String username, String email,  String password, String role)
     {
-        User user = new User();
-        user.set("username", username,  "password", password,"role", role);
-        user.saveIt();
+        return DB.withConnection(() ->
+        {
+            User user = new User();
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setRole(role);
+            return user.saveIt();
+        });
     }
 
-    public boolean updateByUsername(String username, String newUsername, String newPassword)
+    public Boolean updateById(int id, String newUsername, String newRole)
     {
-        User user = this.findByUsername(username);
-        user.set("username", newUsername, "password", newPassword);
-        return user.saveIt();
+        return DB.withConnection(() ->
+        {
+            User user = this.findById(id);
+            user.setUsername(newUsername);
+            user.setRole(newRole);
+            return user.saveIt();
+        });
     }
 
-    public static boolean userExist(String username)
+    public boolean updateByUsername(String username, String newUsername, String newRole)
     {
-        return User.findFirst("username = ?", username) != null;
+        return DB.withConnection(() ->
+        {
+            User user = this.findByUsername(username);
+            user.setUsername(newUsername);
+            user.setRole(newRole);
+            return user.saveIt();
+        });
+    }
+
+    public boolean loggUserUpdate(String username, String newUsername, String newEmail)
+    {
+        return DB.withConnection(() ->
+        {
+            User user = this.findByUsername(username);
+            user.setUsername(newUsername);
+            user.setEmail(newEmail);
+            return user.saveIt();
+        });
+    }
+
+    public boolean loggUserUpdatePassword(String username, String newPassword)
+    {
+        return DB.withConnection(() ->
+        {
+            User user = this.findByUsername(username);
+            user.setPassword(newPassword);
+            return user.saveIt();
+        });
     }
 
     public LazyList<User> getAll() {
-
         return User.findAll();
     }
 
-    public User findByUsername(String username)
-    {
+    public User findById(int id) {
+        return User.findFirst("id = ?", id);
+    }
+
+    public int deleteByID(int id) { return User.delete("id = ?", id); }
+
+    public User findByUsername(String username) {
         return User.findFirst("username = ?", username);
+    }
+
+    public static boolean userExist(String username) {
+        return User.findFirst("username = ?", username) != null;
+    }
+
+    public List<User> gr() {
+        return null;
     }
 }

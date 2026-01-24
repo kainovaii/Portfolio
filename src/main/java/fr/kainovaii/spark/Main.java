@@ -1,6 +1,7 @@
 package fr.kainovaii.spark;
 
-import fr.kainovaii.spark.core.Spark;
+import fr.kainovaii.core.Spark;
+
 public class Main
 {
     public static void main(String[] args) throws Exception

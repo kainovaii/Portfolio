@@ -1,7 +1,7 @@
-package fr.kainovaii.spark.core.database;
+package fr.kainovaii.core.database;
 
 
-import fr.kainovaii.spark.core.Spark;
+import fr.kainovaii.core.Spark;
 import org.javalite.activejdbc.Base;
 
 import java.util.concurrent.Callable;

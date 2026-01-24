@@ -1,17 +1,16 @@
 package fr.kainovaii.spark.app.repository;
 
 import fr.kainovaii.spark.app.models.Setting;
-import fr.kainovaii.spark.app.models.Skill;
-import fr.kainovaii.spark.core.database.DB;
+import fr.kainovaii.core.database.DB;
 import org.javalite.activejdbc.LazyList;
 
 public class SettingRepository
 {
-    public boolean create(boolean admin_exist)
+    public boolean create(int admin_exist)
     {
         return DB.withConnection(() -> {
             Setting setting = new Setting();
-            setting.set("admin_exist", admin_exist);
+            setting.setAdminExist(admin_exist);
             return setting.saveIt();
         });
     }
