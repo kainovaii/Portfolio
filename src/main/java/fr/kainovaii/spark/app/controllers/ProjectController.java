@@ -1,8 +1,11 @@
 package fr.kainovaii.spark.app.controllers;
 
 import fr.kainovaii.core.database.DB;
+import fr.kainovaii.core.security.HasRole;
 import fr.kainovaii.core.web.controller.BaseController;
 import fr.kainovaii.core.web.controller.Controller;
+import fr.kainovaii.core.web.methods.GET;
+import fr.kainovaii.core.web.methods.POST;
 import fr.kainovaii.spark.app.models.Project;
 import fr.kainovaii.spark.app.repository.ProjectRepository;
 import spark.Request;
@@ -12,41 +15,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-
 @Controller
 public class ProjectController extends BaseController
 {
-    private final ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository = new ProjectRepository();
 
-    public ProjectController()
-    {
-        initRoutes();
-        this.projectRepository = new ProjectRepository();
-    }
-
-    private void initRoutes()
-    {
-        get("/admin/projects", this::list);
-        post("/api/projects/create", this::create);
-        post("/api/projects/update", this::update);
-        get("/api/projects/delete/:id", this::delete);
-    }
-
+    @HasRole("ADMIN")
+    @GET("/admin/projects")
     private Object list(Request req, Response res)
     {
-        requireLogin(req, res);
-
         List<Project> projects = DB.withConnection(() -> projectRepository.getAll().stream().toList());
-
         return render("admin/projects/projects.html", Map.of("projects", projects));
     }
 
+    @HasRole("ADMIN")
+    @POST("/api/projects/create")
     private Object create(Request req, Response res)
     {
-        requireLogin(req, res);
-
         String icon = req.queryParams("icon");
         String title = req.queryParams("title");
         String description = req.queryParams("description");
@@ -61,24 +46,10 @@ public class ProjectController extends BaseController
         return true;
     }
 
-    private Object delete(Request req, Response res)
-    {
-        requireLogin(req, res);
-
-        int skillId = Integer.parseInt(req.params("id"));
-
-        boolean query = DB.withConnection(() -> projectRepository.deleteById(skillId));
-
-        if (!query) redirectWithFlash(req, res, "error", "Delete error", "/admin/projects");
-
-        redirectWithFlash(req, res, "success", "Delete success", "/admin/projects");
-        return true;
-    }
-
+    @HasRole("ADMIN")
+    @POST("/api/projects/update")
     private Object update(Request req, Response res)
     {
-        requireLogin(req, res);
-
         int id = Integer.parseInt(req.queryParams("id"));
         String icon = req.queryParams("icon");
         String title = req.queryParams("title");
@@ -91,6 +62,20 @@ public class ProjectController extends BaseController
         if (!query) redirectWithFlash(req, res, "error", "Update error", "/admin/projects");
 
         redirectWithFlash(req, res, "success", "Update success", "/admin/projects");
+        return true;
+    }
+
+    @HasRole("ADMIN")
+    @GET("/api/projects/delete/:id")
+    private Object delete(Request req, Response res)
+    {
+        int skillId = Integer.parseInt(req.params("id"));
+
+        boolean query = DB.withConnection(() -> projectRepository.deleteById(skillId));
+
+        if (!query) redirectWithFlash(req, res, "error", "Delete error", "/admin/projects");
+
+        redirectWithFlash(req, res, "success", "Delete success", "/admin/projects");
         return true;
     }
 }
