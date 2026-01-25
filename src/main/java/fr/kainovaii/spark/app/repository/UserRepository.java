@@ -21,22 +21,25 @@ public class UserRepository {
         });
     }
 
-    public Boolean updateById(int id, String newUsername, String newRole)
+    public boolean updateByUsername(String username, String newUsername, String newRole)
     {
         return DB.withConnection(() ->
         {
-            User user = this.findById(id);
+            User user = User.findFirst("username = ?", username);
+            if (user == null) {
+                throw new IllegalArgumentException("User not found: " + username);
+            }
             user.setUsername(newUsername);
             user.setRole(newRole);
             return user.saveIt();
         });
     }
 
-    public boolean updateByUsername(String username, String newUsername, String newRole)
+    public Boolean updateById(int id, String newUsername, String newRole)
     {
         return DB.withConnection(() ->
         {
-            User user = this.findByUsername(username);
+            User user = this.findById(id);
             user.setUsername(newUsername);
             user.setRole(newRole);
             return user.saveIt();
@@ -73,6 +76,8 @@ public class UserRepository {
     }
 
     public int deleteByID(int id) { return User.delete("id = ?", id); }
+
+    public int deleteByUsername(String username) { return User.delete("username = ?", username); }
 
     public User findByUsername(String username) {
         return User.findFirst("username = ?", username);
