@@ -54,7 +54,7 @@ public class AccountController extends BaseController
     }
 
     @HasRole("DEFAULT")
-    @POST(value = "/users/account", name = "user_update_password")
+    @POST(value = "/users/password", name = "user_update_password")
     private Object updateUserPassword(Request req, Response res)
     {
         String newPassword = req.queryParams("password");
