@@ -44,7 +44,7 @@ Bienvenue sur le dépôt de mon **portfolio personnel**, développé en **Java**
 
 Voici un aperçu de mon portfolio :
 
-![Aperçu 1](https://i.ibb.co/prLcZFSm/portfolio-screen-1.png)
+![Aperçu 1](https://i.ibb.co/pvgf0BR4/Capture-d-cran-2026-01-27-004239.png)
 
 ---
 
