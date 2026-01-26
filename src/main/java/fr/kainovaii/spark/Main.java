@@ -10,6 +10,7 @@ public class Main
         app.registerMotd();
         app.loadConfigAndEnv();
         app.connectDatabase();
+        app.loadMigrations();
         app.startWebServer();
         app.initWebsite();
     }

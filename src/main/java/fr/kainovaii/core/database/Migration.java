@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 public abstract class Migration
 {
-
     protected String type; // sqlite, mysql, postgresql
     protected Logger logger;
 
@@ -15,8 +14,8 @@ public abstract class Migration
 
     public abstract void down();
 
-
-    protected void createTable(String tableName, TableBuilder builder) {
+    protected void createTable(String tableName, TableBuilder builder)
+    {
         StringBuilder sql = new StringBuilder();
         sql.append("CREATE TABLE IF NOT EXISTS ").append(tableName).append(" (");
 
@@ -27,29 +26,30 @@ public abstract class Migration
         sql.append(")");
 
         Base.exec(sql.toString());
-        logger.info("Table créée: " + tableName);
+        logger.info("Table created: " + tableName);
     }
 
     protected void dropTable(String tableName) {
         Base.exec("DROP TABLE IF EXISTS " + tableName);
-        logger.info("Table supprimée: " + tableName);
+        logger.info("Table dropped: " + tableName);
     }
 
     protected void addColumn(String tableName, String columnName, String definition) {
         Base.exec(String.format("ALTER TABLE %s ADD COLUMN %s %s", tableName, columnName, definition));
-        logger.info("Colonne ajoutée: " + tableName + "." + columnName);
+        logger.info("Column added: " + tableName + "." + columnName);
     }
 
     protected void dropColumn(String tableName, String columnName) {
         if (type.equals("sqlite")) {
-            logger.warning("SQLite ne supporte pas DROP COLUMN - migration ignorée");
+            logger.warning("SQLite does not support DROP COLUMN - migration skipped");
             return;
         }
         Base.exec(String.format("ALTER TABLE %s DROP COLUMN %s", tableName, columnName));
-        logger.info("Colonne supprimée: " + tableName + "." + columnName);
+        logger.info("Column dropped: " + tableName + "." + columnName);
     }
 
-    protected boolean tableExists(String tableName) {
+    protected boolean tableExists(String tableName)
+    {
         String checkSQL = switch (type) {
             case "mysql" -> "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = ?";
             case "postgresql" -> "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = ?";
@@ -149,7 +149,8 @@ public abstract class Migration
             return this;
         }
 
-        public Blueprint timestamps() {
+        public Blueprint timestamps()
+        {
             if (dbType.equals("mysql")) {
                 columns.add("created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
                 columns.add("updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");

@@ -7,6 +7,7 @@ import org.javalite.activejdbc.Base;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,6 +19,11 @@ public class MigrationTest
     @BeforeAll
     public static void setup()
     {
+        File dbFile = new File("Spark/test_migration.db");
+        if (dbFile.exists()) {
+            dbFile.delete();
+        }
+
         DB.initSQLite("Spark/test_migration.db", logger);
     }
 

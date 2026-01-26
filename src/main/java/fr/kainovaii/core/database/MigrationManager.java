@@ -34,16 +34,16 @@ public class MigrationManager
                 String migrationName = "migration_" + (i + 1);
 
                 if (!isMigrationExecuted(migrationName)) {
-                    logger.info("Exécution migration: " + migrationName);
+                    logger.info("Executing migration: " + migrationName);
                     migrations.get(i).up();
                     recordMigration(migrationName);
-                    logger.info("✓ Migration complétée: " + migrationName);
+                    logger.info("✓ Migration completed: " + migrationName);
                 } else {
-                    logger.fine("Migration déjà exécutée: " + migrationName);
+                    logger.fine("Migration already executed: " + migrationName);
                 }
             }
 
-            logger.info("Toutes les migrations sont à jour");
+            logger.info("All migrations are up to date");
             return null;
         });
     }
@@ -54,14 +54,14 @@ public class MigrationManager
                 String migrationName = "migration_" + (i + 1);
 
                 if (isMigrationExecuted(migrationName)) {
-                    logger.info("Annulation migration: " + migrationName);
+                    logger.info("Rolling back migration: " + migrationName);
                     migrations.get(i).down();
                     removeMigration(migrationName);
-                    logger.info("✓ Migration annulée: " + migrationName);
+                    logger.info("✓ Migration rolled back: " + migrationName);
                 }
             }
 
-            logger.info("Toutes les migrations ont été annulées");
+            logger.info("All migrations have been rolled back");
             return null;
         });
     }
@@ -72,10 +72,10 @@ public class MigrationManager
                 String migrationName = "migration_" + (i + 1);
 
                 if (isMigrationExecuted(migrationName)) {
-                    logger.info("Annulation dernière migration: " + migrationName);
+                    logger.info("Rolling back last migration: " + migrationName);
                     migrations.get(i).down();
                     removeMigration(migrationName);
-                    logger.info("✓ Dernière migration annulée");
+                    logger.info("✓ Last migration rolled back");
                     break;
                 }
             }
@@ -90,13 +90,13 @@ public class MigrationManager
 
     public void status() {
         database.withConnection(() -> {
-            System.out.println("\n=== Statut des migrations ===");
+            System.out.println("\n=== Migration Status ===");
             for (int i = 0; i < migrations.size(); i++) {
                 String migrationName = "migration_" + (i + 1);
-                String status = isMigrationExecuted(migrationName) ? "✓ Exécutée" : "✗ En attente";
+                String status = isMigrationExecuted(migrationName) ? "✓ Executed" : "✗ Pending";
                 System.out.println(migrationName + " - " + status);
             }
-            System.out.println("=============================\n");
+            System.out.println("========================\n");
             return null;
         });
     }

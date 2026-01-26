@@ -1,6 +1,11 @@
 package fr.kainovaii.core;
 
 import fr.kainovaii.core.database.DB;
+import fr.kainovaii.core.database.MigrationManager;
+import fr.kainovaii.spark.app.migrations.CreateProjectsTable;
+import fr.kainovaii.spark.app.migrations.CreateSettingsTable;
+import fr.kainovaii.spark.app.migrations.CreateSkillsTable;
+import fr.kainovaii.spark.app.migrations.CreateUsersTable;
 import fr.kainovaii.spark.app.models.Setting;
 import fr.kainovaii.spark.app.repository.SettingRepository;
 import fr.kainovaii.spark.app.repository.UserRepository;
@@ -18,6 +23,18 @@ public class Spark
     {
         System.out.println("Loading database");
         DB.initSQLite("Spark/data.db", logger);
+    }
+
+    public void loadMigrations()
+    {
+        MigrationManager migrations = new MigrationManager(DB.getInstance(), logger);
+        migrations
+            .add(new CreateUsersTable())
+            .add(new CreateSkillsTable())
+            .add(new CreateProjectsTable())
+            .add(new CreateSettingsTable());
+
+        migrations.migrate();
     }
 
     public static EnvLoader loadConfigAndEnv()
@@ -78,7 +95,6 @@ public class Spark
                     setting.saveIt();
                 }
             }
-
             return null;
         });
     }
