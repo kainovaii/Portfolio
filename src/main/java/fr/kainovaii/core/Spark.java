@@ -1,9 +1,9 @@
 package fr.kainovaii.core;
 
+import fr.kainovaii.core.database.DB;
 import fr.kainovaii.spark.app.models.Setting;
 import fr.kainovaii.spark.app.repository.SettingRepository;
 import fr.kainovaii.spark.app.repository.UserRepository;
-import fr.kainovaii.core.database.SQLite;
 import fr.kainovaii.core.web.WebServer;
 import org.javalite.activejdbc.LazyList;
 
@@ -11,20 +11,13 @@ import java.util.logging.Logger;
 
 public class Spark
 {
-    public final static Logger LOGGER =  Logger.getLogger("Spark");;
-    private final SQLite sqlite;
+    public final static Logger logger =  Logger.getLogger("Spark");;
     private static String webPort;
-
-    public Spark()
-    {
-        this.sqlite =  new SQLite(Spark.LOGGER);
-    }
 
     public void connectDatabase()
     {
         System.out.println("Loading database");
-        sqlite.connectDatabaseForCurrentThread();
-        sqlite.ensureTablesExist();
+        DB.initSQLite("Spark/data.db", logger);
     }
 
     public static EnvLoader loadConfigAndEnv()
@@ -63,26 +56,30 @@ public class Spark
 
     public void initWebsite()
     {
-        UserRepository userRepository = new UserRepository();
-        SettingRepository settingRepository = new SettingRepository();
+        DB.withTransaction(() -> {
+            UserRepository userRepository = new UserRepository();
+            SettingRepository settingRepository = new SettingRepository();
 
-        LazyList<Setting> settings = settingRepository.getAll();
+            LazyList<Setting> settings = settingRepository.getAll();
 
-        boolean adminExist = false;
-        if (!settings.isEmpty()) {
-            Setting setting = settings.get(0);
-            adminExist = setting.getBoolean("admin_exist");
-        }
-
-        if (!adminExist && !UserRepository.userExist("admin")) {
-            userRepository.create("admin","admin@email.com", "$2a$12$8oYepa4rQw2xixu1KpvTbeg9aVAifZCUZGhn5/rfE7ugjqk9SXi5q", "ADMIN");
-            if (settings.isEmpty()) {
-                settingRepository.create(1);
-            } else {
+            boolean adminExist = false;
+            if (!settings.isEmpty()) {
                 Setting setting = settings.get(0);
-                setting.set("admin_exist", 1);
-                setting.saveIt();
+                adminExist = setting.getBoolean("admin_exist");
             }
-        }
+
+            if (!adminExist && !UserRepository.userExist("admin")) {
+                userRepository.create("admin", "admin@email.com", "$2a$12$8oYepa4rQw2xixu1KpvTbeg9aVAifZCUZGhn5/rfE7ugjqk9SXi5q", "ADMIN");
+                if (settings.isEmpty()) {
+                    settingRepository.create(1);
+                } else {
+                    Setting setting = settings.get(0);
+                    setting.set("admin_exist", 1);
+                    setting.saveIt();
+                }
+            }
+
+            return null;
+        });
     }
 }
