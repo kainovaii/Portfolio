@@ -1,0 +1,64 @@
+{% extends "view/layout/admin.html" %}
+{% block content %}
+<div class="topbar">
+    <button class="tb-burger" id="sb-toggle">&#9776;</button>
+    <div class="topbar-left">
+        <div class="tb-title">Utilisateurs</div>
+        <div class="tb-crumb">Dashboard <span>/</span> Utilisateurs</div>
+    </div>
+    <div class="tb-right">
+        <a data-oc-open="create-user" class="btn btn-primary">+ Nouvel utilisateur</a>
+    </div>
+</div>
+<div class="content">
+    <div class="stats-grid stats-3 mb-22">
+        <div class="stat-mini">
+            <div class="sm-val" data-target="{{ users | length }}">0</div>
+            <div class="sm-label">Total utilisateurs</div>
+        </div>
+        <div class="stat-mini">
+            <div class="sm-val" data-target="{{ loggedCount }}">0</div>
+            <div class="sm-label">En ligne</div>
+        </div>
+        <div class="stat-mini">
+            <div class="sm-val" data-target="{{ adminCount }}">0</div>
+            <div class="sm-label">Admins</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">// Utilisateurs</div>
+            <div class="card-actions"><span class="badge badge-purple">ActiveJDBC Model</span></div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Date de création</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.createdAt | date("dd MMM yyy") }}</td>
+                    <td><a class="btn btn-ghost btn-xs" data-oc-open="edit-user-{{ user.id }}">Voir</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include("./user_single.html") %}
+{% include("./user_create.html") %}
+{% endblock %}

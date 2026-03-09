@@ -1,4 +1,4 @@
-package fr.kainovaii.obsidian;
+package fr.kainovaii.porfolio;
 
 import fr.kainovaii.obsidian.core.Obsidian;
 

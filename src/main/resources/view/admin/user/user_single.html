@@ -1,0 +1,68 @@
+{% for user in users %}
+<div class="oc-backdrop" data-oc-for="edit-user-{{ user.id }}"></div>
+<form action="/users/update" method="POST" class="offcanvas offcanvas-right offcanvas-lg" id="edit-user-{{ user.id }}">
+    <div class="oc-header">
+        <div class="oc-title">// Edit user &middot; {{ user.username }}</div>
+        <a class="oc-close" data-oc-close>&#10005;</a>
+    </div>
+    <div class="oc-body">
+        {{ csrf_field() | raw }}
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <div class="col-stack gap-14">
+            <div class="oc-section mt-14">Informations</div>
+            <div class="input-wrap">
+                <div class="input-label">Identifiant</div>
+                <input class="input" type="text" name="username" value="{{ error('username') ? old('username') : user.username }}" />
+                <div class="lf-error">{{ error('username') }}</div>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Email</div>
+                <input class="input" name="email" value="{{ error('email') ? old('email') : user.email }}" />
+                <div class="lf-error">{{ error('email') }}</div>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Rôle</div>
+                <select name="role" class="input">
+                    <option>DEFAULT</option>
+                    <option>ADMIN</option>
+                </select>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Mot de passe</div>
+                <input class="input" type="password" name="password" value="{{ old('password') }}" />
+                <div class="lf-error">{{ error('password') }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="oc-footer">
+        <a class="btn btn-danger btn-sm" data-modal-open="delete-user-confirm-{{ user.id }}">Supprimer</a>
+        <div class="ml-auto flex gap-8">
+            <a class="btn btn-ghost" data-oc-close>Fermer</a>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </div>
+    </div>
+</form>
+
+<div class="modal-backdrop modal-danger" id="delete-user-confirm-{{ user.id }}">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <div class="modal-title">// Confirmation requise</div>
+            <button class="modal-close" data-modal-close>&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="flex flex-col items-center" style="text-align:center;padding:8px 0">
+                <div class="modal-icon modal-icon-danger">&#9888;</div>
+                <div class="fw-800" style="font-size:.9rem;margin-bottom:8px">Supprimer {{ user.username }}&nbsp;?</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-ghost" data-modal-close>Annuler</button>
+            <form action="/users/delete" method="POST">
+                {{ csrf_field() | raw }}
+                <input type="hidden" name="username" value="{{ user.username }}">
+                <button class="btn btn-danger">Supprimer définitivement</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}

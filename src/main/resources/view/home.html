@@ -1,0 +1,232 @@
+{% extends "view/layout/front.html" %}
+{% block content %}
+<section id="hero">
+    <div class="hero-left">
+        <div class="hero-badge reveal">
+            <span class="badge-dot"></span>
+            <span>Disponible pour de nouveaux projets</span>
+            <span class="badge-sep">·</span>
+            <span class="badge-loc">FR</span>
+        </div>
+        <h1 class="reveal">
+            <span class="h1-line h1-solid">Kaino</span>
+            <span class="h1-line h1-outline">Vaii</span>
+        </h1>
+        <div class="hero-meta reveal">
+            <span class="hm-tag">&lt;dev&gt;</span>
+            <span class="hm-pipe">|</span>
+            <span>Java · Open-source</span>
+            <span class="hm-tag">&lt;dev /&gt;</span>
+        </div>
+        <p class="hero-desc reveal">
+            Créateur d'<a class="no-decoration" target="_blank" href="https://obsidian-java.com/"><strong>Obsidian</strong></a> — Un framework web Java propulsé par <a class="no-decoration" target="_blank" href="https://github.com/sparkjava-community"><strong>Spark Java</strong></a>.
+        </p>
+        <div class="hero-ctas reveal">
+            <a href="#projects" class="btn-primary">
+                <span>Voir les projets</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#contact" class="btn-ghost">Me contacter</a>
+        </div>
+    </div>
+    <div class="hero-right reveal">
+        <div class="gh-win">
+            <div class="win-bar">
+                <span class="gh-dot" style="background:#ff5f57"></span>
+                <span class="gh-dot" style="background:#febc2e"></span>
+                <span class="gh-dot" style="background:#28c840"></span>
+                <span class="gh-title">github.com/kainovaii</span>
+                <span class="gh-badge" id="ghRateLabel">live</span>
+            </div>
+            <div class="gh-body" id="ghBody">
+                <div class="gh-loading"><div class="gh-spin"></div>Chargement…</div>
+            </div>
+            <div class="gh-footer">
+                <span><span class="gh-status-dot"></span><span id="ghFooterLeft">github.com/kainovaii</span></span>
+                <span id="ghFooterRight">—</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-track"><div class="scroll-thumb"></div></div>
+        <span>scroll</span>
+    </div>
+</section>
+<section id="projects">
+    <div class="section-header reveal">
+        <div class="sh-left">
+            <span class="section-num">01</span>
+            <div class="sh-lines">
+                <div class="section-tag">// Projets open-source</div>
+                <h2 class="section-title">Ce que je <em>build</em></h2>
+            </div>
+        </div>
+        <p class="sh-desc">Fait avec soin, partagé sans condition. <a href="https://github.com/kainovaii" target="_blank" class="pe-link text-primary">↗ voir plus</a></p>
+    </div>
+
+    <div class="projects-editorial">
+        <div class="pe-row pe-row-1">
+            <div class="pe-card pe-featured reveal">
+                <div class="pe-accent-bar"></div>
+                <div class="pe-inner">
+                    <div class="pe-top">
+                        <div class="pe-num-big">01</div>
+                        <div class="pe-links">
+                            <a href="https://obsidian-java.com" target="_blank" class="pe-link">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                                site
+                            </a>
+                            <a href="https://github.com/obsidian-framework" target="_blank" class="pe-link">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                github
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="pe-title">Obsidian<span class="pe-diamond">◈</span></h3>
+                    <p class="pe-desc">Framework web Java moderne avec injection de dépendances, LiveComponents SSE, validation, CLI intégré, Markdown.</p>
+                    <div class="pe-footer">
+                        <div class="pe-tags">
+                            <span class="tag">Java</span><span class="tag">Spark</span><span class="tag">Pebble</span><span class="tag">ActiveJDBC</span>
+                        </div>
+                        <span class="pe-status-pill">v1.1.8 — actif</span>
+                    </div>
+                </div>
+                <div class="pe-glow"></div>
+            </div>
+
+            <div class="pe-col-right">
+                <div class="pe-card pe-secondary reveal reveal-delay-1">
+                    <div class="pe-inner">
+                        <div class="pe-top">
+                            <div class="pe-num-big">02</div>
+                            <a href="https://github.com/sparkjava-community/spark" target="_blank" class="pe-link">↗ github</a>
+                        </div>
+                        <h3 class="pe-title">Spark Java</h3>
+                        <p class="pe-desc">Mainteneur du framework web Java minimaliste. Bugs, assets statiques, JDK moderne.</p>
+                        <div class="pe-tags">
+                            <span class="tag">Java</span><span class="tag">Jetty</span><span class="tag">OSS</span>
+                        </div>
+                    </div>
+                    <div class="pe-glow"></div>
+                </div>
+
+                <div class="pe-card pe-secondary reveal reveal-delay-2">
+                    <div class="pe-inner">
+                        <div class="pe-top">
+                            <div class="pe-num-big">03</div>
+                            <a href="https://github.com/kainovaii/MineVote" class="pe-link">↗ voir</a>
+                        </div>
+                        <h3 class="pe-title">MineVote</h3>
+                        <p class="pe-desc">Minecraft voting plugin (Votifier) with custom rewards. For Paper/Spigot servers.</p>
+                        <div class="pe-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">SQLite</span>
+                            <span class="tag">Bukkit API</span>
+                        </div>
+                    </div>
+                    <div class="pe-glow"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="skills">
+    <div class="section-header reveal">
+        <div class="sh-left">
+            <span class="section-num">02</span>
+            <div class="sh-lines">
+                <div class="section-tag">// Stack technique</div>
+                <h2 class="section-title">Skills &amp; <em>outils</em></h2>
+            </div>
+        </div>
+        <p class="sh-desc">Drag les nodes pour explorer la constellation.</p>
+    </div>
+
+    <div class="constellation-wrap reveal">
+        <canvas id="constellation" class="constellation-canvas"></canvas>
+        <div class="constellation-hint">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+            drag &amp; drop
+        </div>
+    </div>
+
+    <div class="stats-row reveal">
+        <div class="stat-glass">
+            <span class="stat-num"><span class="counter" data-target="10">0</span><sup>+</sup></span>
+            <span class="stat-lbl">Repo Open-source</span>
+        </div>
+        <div class="stat-glass">
+            <span class="stat-num"><span class="counter" data-target="6">0</span><sup>ans</sup></span>
+            <span class="stat-lbl">D'expérience</span>
+        </div>
+        <div class="stat-glass">
+            <span class="stat-num"><span class="counter" data-target="100">0</span><sup>%</sup></span>
+            <span class="stat-lbl">Open-source</span>
+        </div>
+
+    </div>
+</section>
+<section id="contact">
+    <div class="section-header reveal">
+        <div class="sh-left">
+            <span class="section-num">03</span>
+            <div class="sh-lines">
+                <div class="section-tag">// Travaillons ensemble</div>
+                <h2 class="section-title">Get in <em>touch</em></h2>
+            </div>
+        </div>
+        <p class="sh-desc">Un projet, ou juste une discussion ? Je réponds.</p>
+    </div>
+
+    <div class="contact-layout">
+        <div class="contact-left reveal">
+            <a href="mailto:hello@kainovaii.dev" class="contact-big-link">
+                <span>hello@kainovaii.dev</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                </svg>
+            </a>
+            <div class="contact-socials">
+                <a href="https://github.com/kainovaii" target="_blank" class="cs-row">
+                    <span class="cs-label">GitHub</span>
+                    <span class="cs-value">@kainovaii →</span>
+                </a>
+                <a href="https://obsidian-java.com" target="_blank" class="cs-row">
+                    <span class="cs-label">Framework</span>
+                    <span class="cs-value">obsidian-java.com →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-right reveal reveal-delay-1">
+            <form action="/message" method="POST">
+                {{ csrf_field() | raw }}
+                <div class="cf-field">
+                    <input type="text" id="cf-name" name="name" value="{{ old('name') }}" autocomplete="off">
+                    <label for="cf-name">Nom</label>
+                    <div class="cf-line"></div>
+                    <div class="lf-error">{{ error('name') }}</div>
+                </div>
+                <div class="cf-field">
+                    <input id="cf-email" value="{{ old('email') }}" name="email" autocomplete="off">
+                    <label for="cf-email">Email</label>
+                    <div class="cf-line"></div>
+                    <div class="lf-error">{{ error('email') }}</div>
+                </div>
+                <div class="cf-field">
+                    <textarea id="cf-msg" name="message" rows="4">{{ old('message') }}</textarea>
+                    <label for="cf-msg">Message</label>
+                    <div class="cf-line"></div>
+                    <div class="lf-error">{{ error('message') }}</div>
+                </div>
+                <button class="btn-primary btn-send" type="submit">
+                    <span>Envoyer</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

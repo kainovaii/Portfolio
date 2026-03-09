@@ -1,4 +1,4 @@
-package fr.kainovaii.obsidian.app.controllers;
+package fr.kainovaii.porfolio.app.http.controllers;
 
 import fr.kainovaii.obsidian.http.controller.BaseController;
 import fr.kainovaii.obsidian.http.controller.annotations.Controller;
@@ -9,11 +9,11 @@ import spark.Response;
 import java.util.Map;
 
 @Controller
-public class WelcomeController extends BaseController
+public class HomeController extends BaseController
 {
     @GET(value = "/", name = "site.home")
     private Object homepage(Request req, Response res)
     {
-        return render("welcome.html", Map.of());
+        return render("home.html", Map.of());
     }
 }

@@ -1,0 +1,97 @@
+{% extends "view/layout/admin.html" %}
+{% block content %}
+<div class="topbar">
+    <div class="topbar-left">
+        <div class="tb-title">Message</div>
+        <div class="tb-crumb">Dashboard <span>/</span> Message</div>
+    </div>
+    <div class="tb-right">
+
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">// Messages</div>
+            <div class="card-actions"><span class="badge badge-purple">ActiveJDBC Model</span></div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for message in messages %}
+                <tr>
+                    <td>{{ message.id }}</td>
+                    <td>{{ message.name }}</td>
+                    <td>{{ message.email }}</td>
+                    <td>{{ message.message | abbreviate(70) }}</td>
+                    <td>{{ message.createdAt | date("dd MMM yyy") }}</td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" data-modal-open="delete-message-confirm-{{ message.id }}">Delete</a>
+                        <a class="btn btn-ghost btn-xs" data-modal-open="view-message-modal-{{ message.id }}">Voir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% for message in messages %}
+<div class="modal-backdrop" id="view-message-modal-{{ message.id }}">
+    <div class="modal modal-md">
+        <div class="modal-header">
+            <div class="modal-title">// Message</div>
+            <button class="modal-close" data-modal-close>&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="kv-row">
+                <span class="kv-key">Nom</span>
+                <span class="kv-val td-code" data-copy="{{ message.name }}" title="Copier" style="cursor: pointer">{{ message.name }}</span>
+            </div>
+            <div class="kv-row">
+                <span class="kv-key">Email</span>
+                <span class="kv-val td-code" data-copy="{{ message.email }}" title="Copier" style="cursor: pointer">{{ message.email }}</span>
+            </div>
+            <div class="code-block mt-6" style="line-height:1.8">{{ message.message }}</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-ghost" data-modal-close>Fermer</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop modal-danger" id="delete-message-confirm-{{ message.id }}">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <div class="modal-title">// Confirmation requise</div>
+            <button class="modal-close" data-modal-close>&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="flex flex-col items-center" style="text-align:center;padding:8px 0">
+                <div class="modal-icon modal-icon-danger">&#9888;</div>
+                <div class="fw-800" style="font-size:.9rem;margin-bottom:8px">Supprimer message de {{ message.name }}&nbsp;?</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-ghost" data-modal-close>Annuler</button>
+            <form action="/message/delete" method="POST">
+                {{ csrf_field() | raw }}
+                <input type="hidden" name="id" value="{{ message.id }}">
+                <button class="btn btn-danger">Supprimer définitivement</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

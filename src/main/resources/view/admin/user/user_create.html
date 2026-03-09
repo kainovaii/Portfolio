@@ -1,0 +1,42 @@
+<div class="oc-backdrop" data-oc-for="create-user"></div>
+<form action="/users/create" method="POST" class="offcanvas offcanvas-right offcanvas-lg" id="create-user">
+    <div class="oc-header">
+        <div class="oc-title">// Nouvel utilisateur</div>
+        <a class="oc-close" data-oc-close>&#10005;</a>
+    </div>
+    <div class="oc-body">
+        {{ csrf_field() | raw }}
+        <div class="col-stack gap-14">
+            <div class="oc-section mt-14">Informations</div>
+            <div class="input-wrap">
+                <div class="input-label">Identifiant</div>
+                <input class="input" type="text" name="username" value="{{ old('username') }}" />
+                <div class="lf-error">{{ error('username') }}</div>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Email</div>
+                <input class="input" name="email" value="{{ old('email') }}" />
+                <div class="lf-error">{{ error('email') }}</div>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Rôle</div>
+                <select name="role" class="input">
+                    <option>DEFAULT</option>
+                    <option>ADMIN</option>
+                </select>
+            </div>
+            <div class="input-wrap">
+                <div class="input-label">Mot de passe</div>
+                <input class="input" type="password" name="password" value="{{ old('password') }}" />
+                <div class="lf-error">{{ error('password') }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="oc-footer">
+        <div class="ml-auto flex gap-8">
+            <a class="btn btn-ghost" data-oc-close>Fermer</a>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </div>
+    </div>
+
+</form>

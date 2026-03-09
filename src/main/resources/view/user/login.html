@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Connexion &mdash; Obsidian Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/admin/style.css">
+</head>
+<body class="login-layout">
+<div class="grain"></div>
+<div class="grid-bg"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="login-wrap">
+    <div class="login-card">
+        <div class="login-title">Connexion</div>
+        <div class="login-sub">Acc&egrave;s r&eacute;serv&eacute; &middot; <span>super-admin</span></div>
+
+        <form action="" method="POST">
+            {{ csrf_field() | raw }}
+            <div class="lf-field">
+                <div class="lf-label">Identifiant</div>
+                <div class="lf-wrap">
+                    <span class="lf-icon">&#9678;</span>
+                    <input class="lf-input" name="username" type="text" autocomplete="username">
+                </div>
+            </div>
+            <div class="lf-field">
+                <div class="lf-label">Mot de passe</div>
+                <div class="lf-wrap">
+                    <span class="lf-icon">&#9670;</span>
+                    <input class="lf-input" name="password" type="password"  autocomplete="current-password">
+                    <button class="lf-eye" id="eyeBtn" type="button">&#128065;</button>
+                </div>
+            </div>
+
+            <button class="btn-login" type="submit">
+                <span class="btn-login-text">Se connecter &rarr;</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="login-brand">OBSIDIAN &#9672; ADMIN PANEL</div>
+
+{{ flash() | raw }}
+<script src="/assets/admin/main.js"></script>
+</body>
+</html>
