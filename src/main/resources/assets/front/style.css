@@ -833,3 +833,7 @@ footer {
 .text-white {
   color: #ffffff;
 }
+
+.pe-secondary {
+  height: 100%;
+}

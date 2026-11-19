@@ -169,7 +169,7 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     // Feed activité
     const activity = events
       .filter(e => ['PushEvent','CreateEvent','IssuesEvent','PullRequestEvent','ForkEvent','WatchEvent','ReleaseEvent'].includes(e.type))
-      .slice(0, 6)
+      .slice(0, 10)
       .map(e => {
         const repo = e.repo.name.replace(USER + '/', '');
         const map = {
