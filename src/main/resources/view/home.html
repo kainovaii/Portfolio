@@ -108,44 +108,6 @@
         </div>
     </div>
 </section>
-<!--
-<section id="skills">
-    <div class="section-header reveal">
-        <div class="sh-left">
-            <span class="section-num">02</span>
-            <div class="sh-lines">
-                <div class="section-tag">// Stack technique</div>
-                <h2 class="section-title">Skills &amp; <em>outils</em></h2>
-            </div>
-        </div>
-        <p class="sh-desc">Drag les nodes pour explorer la constellation.</p>
-    </div>
-
-    <div class="constellation-wrap reveal">
-        <canvas id="constellation" class="constellation-canvas"></canvas>
-        <div class="constellation-hint">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
-            drag &amp; drop
-        </div>
-    </div>
-
-    <div class="stats-row reveal">
-        <div class="stat-glass">
-            <span class="stat-num"><span class="counter" data-target="10">0</span><sup>+</sup></span>
-            <span class="stat-lbl">Repo Open-source</span>
-        </div>
-        <div class="stat-glass">
-            <span class="stat-num"><span class="counter" data-target="6">0</span><sup>ans</sup></span>
-            <span class="stat-lbl">D'expérience</span>
-        </div>
-        <div class="stat-glass">
-            <span class="stat-num"><span class="counter" data-target="100">0</span><sup>%</sup></span>
-            <span class="stat-lbl">Open-source</span>
-        </div>
-
-    </div>
-</section>
--->
 <section id="contact">
     <div class="section-header reveal">
         <div class="sh-left">
@@ -175,35 +137,6 @@
                 </a>
             </div>
         </div>
-        <!--
-        <div class="contact-right reveal reveal-delay-1">
-            <form action="/message" method="POST">
-                {{ csrf_field() | raw }}
-                <div class="cf-field">
-                    <input type="text" id="cf-name" name="name" value="{{ old('name') }}" autocomplete="off">
-                    <label for="cf-name">Nom</label>
-                    <div class="cf-line"></div>
-                    <div class="lf-error">{{ error('name') }}</div>
-                </div>
-                <div class="cf-field">
-                    <input id="cf-email" value="{{ old('email') }}" name="email" autocomplete="off">
-                    <label for="cf-email">Email</label>
-                    <div class="cf-line"></div>
-                    <div class="lf-error">{{ error('email') }}</div>
-                </div>
-                <div class="cf-field">
-                    <textarea id="cf-msg" name="message" rows="4">{{ old('message') }}</textarea>
-                    <label for="cf-msg">Message</label>
-                    <div class="cf-line"></div>
-                    <div class="lf-error">{{ error('message') }}</div>
-                </div>
-                <button class="btn-primary btn-send" type="submit">
-                    <span>Envoyer</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                </button>
-            </form>
-        </div>
-        -->
     </div>
 </section>
 {% endblock %}
