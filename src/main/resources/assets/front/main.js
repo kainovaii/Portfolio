@@ -169,7 +169,7 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     // Feed activité
     const activity = events
       .filter(e => ['PushEvent','CreateEvent','IssuesEvent','PullRequestEvent','ForkEvent','WatchEvent','ReleaseEvent'].includes(e.type))
-      .slice(0, 10)
+      .slice(0, 5)
       .map(e => {
         const repo = e.repo.name.replace(USER + '/', '');
         const map = {
@@ -196,17 +196,6 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
           <div class="gh-dc-label">Issues fermées</div>
           <div class="gh-dc-val" id="ghIssueVal">0</div>
           <div class="gh-dc-delta">${deltaIssues}</div>
-        </div>
-      </div>
-
-      <!-- Barres activité -->
-      <div class="gh-chart">
-        <div class="gh-chart-label">Activité · 8 dernières semaines</div>
-        <div class="gh-bars">
-          ${buckets.map((b, i) => `
-            <div class="gh-bar-wrap" title="${b} commit${b !== 1 ? 's' : ''}">
-              <div class="gh-bar" style="height:${Math.max(b/maxB*100, 3)}%;animation-delay:${i*0.07}s"></div>
-            </div>`).join('')}
         </div>
       </div>
 
