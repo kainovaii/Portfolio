@@ -42,7 +42,7 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 (function initGHDashboard() {
   const GH    = 'https://api.github.com';
   const USER  = 'kainovaii';
-  const TOKEN = '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';
+  const TOKEN = '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';
   const H     = { 'Authorization': 'Bearer ' + TOKEN };
 
   const LANG_COLORS = {
